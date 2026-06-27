@@ -7,6 +7,21 @@ import LanguageToggle from "@/components/LanguageToggle";
 
 const LANG_STORAGE_KEY = "datharian-lang";
 
+function Logo({ size = 22 }: { size?: number }) {
+  const height = Math.round((size * 300) / 260);
+  return (
+    <svg width={size} height={height} viewBox="0 0 260 300" aria-hidden="true">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0 0 H180 L260 80 V300 H0 Z M55 70 H150 L195 115 V185 L150 230 H55 Z"
+        fill="#6E2EF6"
+      />
+      <path d="M180 0 H260 V80 Z" fill="#FFA50A" />
+    </svg>
+  );
+}
+
 function CodeColumn({
   animation,
   opacity,
@@ -101,6 +116,7 @@ export default function SiteContent() {
       <nav className="dth-nav">
         <div className="dth-nav-inner">
           <a href="#top" className="dth-brand" aria-label={siteConfig.brandName}>
+            <Logo size={22} />
             {siteConfig.brandName}
           </a>
           <div className="dth-nav-links">
@@ -182,7 +198,7 @@ export default function SiteContent() {
           </div>
         </div>
 
-        <section id="cap" className="section">
+        <section id="cap" className="section cap-section">
           <div className="section-inner">
             <div className="section-head">
               <div className="section-eyebrow">
@@ -201,8 +217,9 @@ export default function SiteContent() {
             </div>
 
             <div className="cap-grid">
-              {t.capabilities.items.map((item) => (
+              {t.capabilities.items.map((item, index) => (
                 <div className="cap-card" key={item.title}>
+                  {index === 0 ? <span className="cap-notch" aria-hidden="true" /> : null}
                   <div className="cap-index">{item.index}</div>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
@@ -249,6 +266,7 @@ export default function SiteContent() {
         <section className="section quote-section">
           <div className="section-inner">
             <div className="quote-block">
+              <span className="quote-mark" aria-hidden="true" />
               <p>{t.quote.text}</p>
               <div className="quote-attr">{t.quote.attribution}</div>
             </div>
@@ -256,6 +274,7 @@ export default function SiteContent() {
         </section>
 
         <section id="cta" className="cta-section">
+          <span className="cta-notch" aria-hidden="true" />
           <div className="section-inner">
             <div className="cta-block">
               <h2>{t.cta.title}</h2>
@@ -272,6 +291,7 @@ export default function SiteContent() {
       <footer className="dth-footer">
         <div className="dth-footer-inner">
           <a href="#top" className="dth-brand">
+            <Logo size={20} />
             {siteConfig.brandName}
           </a>
           <div className="dth-footer-links">

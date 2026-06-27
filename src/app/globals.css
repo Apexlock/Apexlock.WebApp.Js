@@ -1,14 +1,22 @@
 :root {
-  --color-bg: #07070e;
-  --color-surface: #0f0f1c;
-  --color-surface-alt: #141428;
-  --color-text: #e8e6f0;
-  --color-text-muted: #8b89a8;
-  --color-accent: #6c63ff;
-  --color-accent-soft: #cdc9ff;
-  --color-success: #4ade80;
-  --color-line: rgba(108, 99, 255, 0.12);
-  --color-line-strong: rgba(108, 99, 255, 0.35);
+  --color-bg: #0a1226;
+  --color-surface: #121a33;
+  --color-text: #e9e7f2;
+  --color-text-muted: #9d9ab8;
+  --color-text-muted-2: #8e8ba8;
+  --color-text-faint: #7c7a93;
+  --color-accent: #6e2ef6;
+  --color-accent-soft: #c9bef9;
+  --color-accent-eyebrow: #a99bf4;
+  --color-orange: #ffa50a;
+  --color-line: rgba(110, 46, 246, 0.16);
+  --color-line-strong: rgba(110, 46, 246, 0.4);
+  --color-light-bg: #f4f3ef;
+  --color-light-text: #0a1226;
+  --color-light-body: #4a4660;
+  --color-light-card: #ffffff;
+  --color-light-card-hover: #ece6fe;
+  --color-light-line: #e7e6e1;
   --radius: 4px;
 }
 
@@ -53,7 +61,7 @@ svg {
 .metrics-inner,
 .sectors-inner,
 .dth-footer-inner {
-  width: min(100% - 2.5rem, 74rem);
+  width: min(100% - 2.5rem, 76rem);
   margin-inline: auto;
 }
 
@@ -62,13 +70,13 @@ svg {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(7, 7, 14, 0.86);
+  background: rgba(10, 18, 38, 0.86);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-line);
 }
 
 .dth-nav-inner {
-  height: 60px;
+  height: 62px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -76,6 +84,10 @@ svg {
 
 .dth-brand {
   justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--font-serif);
   font-weight: 700;
   font-size: 21px;
   letter-spacing: -0.02em;
@@ -88,7 +100,7 @@ svg {
 }
 
 .dth-nav-links a {
-  color: var(--color-text-muted);
+  color: var(--color-text-muted-2);
   font-size: 13.5px;
   padding: 7px 14px;
   border-radius: var(--radius);
@@ -112,13 +124,13 @@ svg {
   font-weight: 500;
   font-size: 13.5px;
   line-height: 1;
-  padding: 9px 18px;
+  padding: 10px 18px;
   border-radius: var(--radius);
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .dth-nav-cta:hover {
-  opacity: 0.88;
+  opacity: 0.9;
   transform: translateY(-1px);
 }
 
@@ -154,7 +166,7 @@ svg {
 /* HERO */
 .dth-hero {
   position: relative;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 62px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,7 +185,7 @@ svg {
   font-size: 12.5px;
   line-height: 2.05;
   white-space: pre;
-  color: rgba(232, 230, 240, 0.42);
+  color: rgba(233, 231, 242, 0.4);
 }
 
 .hero-code-col {
@@ -186,13 +198,13 @@ svg {
 }
 
 .hl-str {
-  color: var(--color-text-muted);
+  color: var(--color-text-faint);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(7, 7, 14, 0.72);
+  background: rgba(10, 18, 38, 0.72);
 }
 
 .hero-fade {
@@ -201,9 +213,9 @@ svg {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(7, 7, 14, 0.55) 0%,
-    rgba(7, 7, 14, 0) 22%,
-    rgba(7, 7, 14, 0) 78%,
+    rgba(10, 18, 38, 0.55) 0%,
+    rgba(10, 18, 38, 0) 22%,
+    rgba(10, 18, 38, 0) 78%,
     var(--color-bg) 100%
   );
 }
@@ -212,7 +224,7 @@ svg {
   position: relative;
   z-index: 2;
   text-align: center;
-  width: min(100% - 2.5rem, 52rem);
+  width: min(100% - 2.5rem, 54rem);
   margin-inline: auto;
   padding: 64px 0;
 }
@@ -225,22 +237,22 @@ svg {
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-eyebrow);
   margin-bottom: 30px;
 }
 
 .hero-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-success);
+  width: 7px;
+  height: 7px;
+  background: var(--color-orange);
 }
 
 .hero-title {
+  font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(2.6rem, 5.8vw, 4.5rem);
-  line-height: 1.03;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.6rem, 5.8vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   margin-bottom: 26px;
   text-wrap: balance;
 }
@@ -254,7 +266,7 @@ svg {
   color: var(--color-text-muted);
   font-size: 17px;
   line-height: 1.7;
-  max-width: 38rem;
+  max-width: 39rem;
   margin: 0 auto 38px;
 }
 
@@ -283,7 +295,7 @@ svg {
 }
 
 .btn-primary:hover {
-  opacity: 0.88;
+  opacity: 0.9;
   transform: translateY(-1px);
 }
 
@@ -308,7 +320,7 @@ svg {
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(139, 137, 168, 0.55);
+  color: rgba(157, 154, 184, 0.55);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,7 +331,7 @@ svg {
 .hero-scroll span {
   width: 1px;
   height: 20px;
-  background: linear-gradient(rgba(108, 99, 255, 0.6), transparent);
+  background: linear-gradient(rgba(110, 46, 246, 0.6), transparent);
 }
 
 /* METRICS */
@@ -347,15 +359,20 @@ svg {
   align-items: baseline;
   gap: 8px;
   margin-bottom: 8px;
-  font-size: 30px;
-  font-weight: 500;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 600;
   letter-spacing: -0.03em;
+}
+
+.metric:last-child .metric-value span:first-child {
+  color: var(--color-orange);
 }
 
 .metric-up {
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--color-success);
+  font-size: 13px;
+  color: var(--color-orange);
 }
 
 .metric-label {
@@ -363,7 +380,7 @@ svg {
   font-size: 10.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(139, 137, 168, 0.7);
+  color: var(--color-text-faint);
 }
 
 /* SECTORS */
@@ -385,7 +402,7 @@ svg {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(139, 137, 168, 0.55);
+  color: rgba(157, 154, 184, 0.55);
   white-space: nowrap;
 }
 
@@ -410,7 +427,7 @@ svg {
 }
 
 .section-inner {
-  padding: 84px 0;
+  padding: 88px 0;
 }
 
 .section-head {
@@ -425,23 +442,22 @@ svg {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-eyebrow);
   margin-bottom: 16px;
 }
 
 .eyebrow-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+  width: 6px;
+  height: 6px;
   background: var(--color-accent);
 }
 
 .section-title {
   font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3.4vw, 2.5rem);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   margin-bottom: 14px;
 }
 
@@ -449,28 +465,57 @@ svg {
   color: var(--color-text-muted);
   font-size: 15px;
   line-height: 1.65;
-  max-width: 30rem;
+  max-width: 31rem;
 }
 
-/* CAPABILITIES */
+/* CAPABILITIES (light section) */
+.cap-section {
+  background: var(--color-light-bg);
+  color: var(--color-light-text);
+}
+
+.cap-section .section-eyebrow {
+  color: var(--color-accent);
+}
+
+.cap-section .eyebrow-dot {
+  background: var(--color-accent);
+}
+
+.cap-section .section-intro {
+  color: var(--color-light-body);
+}
+
 .cap-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
-  background: var(--color-line);
-  border: 1px solid var(--color-line);
+  background: var(--color-light-line);
+  border: 1px solid var(--color-light-line);
   border-radius: 12px;
   overflow: hidden;
 }
 
 .cap-card {
-  background: var(--color-surface);
-  padding: 38px 34px;
+  position: relative;
+  background: var(--color-light-card);
+  padding: 40px 34px;
+  overflow: hidden;
   transition: background 0.2s ease;
 }
 
 .cap-card:hover {
-  background: var(--color-surface-alt);
+  background: var(--color-light-card-hover);
+}
+
+.cap-notch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 34px solid var(--color-orange);
+  border-left: 34px solid transparent;
 }
 
 .cap-index {
@@ -478,27 +523,26 @@ svg {
   font-size: 10px;
   letter-spacing: 0.16em;
   color: var(--color-accent);
-  opacity: 0.7;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .cap-card h3 {
   font-family: var(--font-serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1.3rem;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   margin-bottom: 11px;
 }
 
 .cap-card p {
-  color: var(--color-text-muted);
+  color: var(--color-light-body);
   font-size: 14px;
   line-height: 1.65;
 }
 
 /* PROCESS */
 .proc-section {
-  background: var(--color-surface-alt);
+  background: var(--color-surface);
 }
 
 .proc {
@@ -507,11 +551,11 @@ svg {
 
 .proc-line {
   position: absolute;
-  top: 22px;
-  left: 22px;
-  right: 22px;
+  top: 23px;
+  left: 23px;
+  right: 23px;
   height: 1px;
-  background: rgba(108, 99, 255, 0.25);
+  background: rgba(110, 46, 246, 0.3);
 }
 
 .proc-grid {
@@ -526,10 +570,10 @@ svg {
 }
 
 .proc-bullet {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--color-surface-alt);
+  position: relative;
+  width: 46px;
+  height: 46px;
+  background: var(--color-surface);
   border: 1px solid var(--color-line-strong);
   color: var(--color-accent-soft);
   display: flex;
@@ -546,8 +590,20 @@ svg {
   color: #fff;
 }
 
+.proc-bullet-active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 13px solid var(--color-orange);
+  border-left: 13px solid transparent;
+}
+
 .proc-step h3 {
-  font-size: 15.5px;
+  font-family: var(--font-serif);
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin-bottom: 9px;
@@ -565,9 +621,9 @@ svg {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.08em;
-  color: var(--color-accent);
-  background: rgba(108, 99, 255, 0.14);
-  border: 1px solid rgba(108, 99, 255, 0.25);
+  color: var(--color-accent-soft);
+  background: rgba(110, 46, 246, 0.16);
+  border: 1px solid rgba(110, 46, 246, 0.3);
   padding: 4px 9px;
   border-radius: var(--radius);
 }
@@ -578,18 +634,25 @@ svg {
 }
 
 .quote-block {
-  max-width: 46rem;
+  max-width: 48rem;
   margin: 0 auto;
   text-align: center;
 }
 
+.quote-mark {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--color-orange);
+  margin-bottom: 30px;
+}
+
 .quote-block p {
   font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.5rem, 3vw, 2.15rem);
-  line-height: 1.4;
-  letter-spacing: -0.005em;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.32;
+  letter-spacing: -0.02em;
   margin-bottom: 32px;
   text-wrap: balance;
 }
@@ -599,33 +662,46 @@ svg {
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-eyebrow);
 }
 
 /* CTA */
 .cta-section {
+  position: relative;
   background: var(--color-accent);
   padding: 92px 0;
+  overflow: hidden;
+}
+
+.cta-notch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 84px solid var(--color-orange);
+  border-left: 84px solid transparent;
 }
 
 .cta-block {
-  max-width: 36rem;
+  position: relative;
+  max-width: 37rem;
   margin: 0 auto;
   text-align: center;
 }
 
 .cta-block h2 {
   font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(1.9rem, 3.8vw, 2.7rem);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   color: #fff;
   margin-bottom: 16px;
 }
 
 .cta-block p {
-  color: rgba(255, 255, 255, 0.74);
+  color: rgba(255, 255, 255, 0.76);
   font-size: 16px;
   line-height: 1.65;
   margin-bottom: 34px;
@@ -646,7 +722,7 @@ svg {
 
 .cta-micro {
   margin-top: 20px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.6);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.06em;
@@ -672,7 +748,7 @@ svg {
 }
 
 .dth-footer-links a {
-  color: var(--color-text-muted);
+  color: var(--color-text-muted-2);
   font-size: 13px;
   transition: color 0.2s ease;
 }
@@ -684,12 +760,12 @@ svg {
 .dth-footer-email {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: rgba(139, 137, 168, 0.7);
+  color: rgba(157, 154, 184, 0.7);
   transition: color 0.2s ease;
 }
 
 .dth-footer-email:hover {
-  color: var(--color-accent);
+  color: var(--color-orange);
 }
 
 /* KEYFRAMES */
@@ -748,7 +824,7 @@ svg {
 
   .proc-step {
     padding: 1.5rem;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-line-strong);
     border-radius: 12px;
   }
 
