@@ -8,16 +8,15 @@ import LanguageToggle from "@/components/LanguageToggle";
 const LANG_STORAGE_KEY = "datharian-lang";
 
 function Logo({ size = 22 }: { size?: number }) {
-  const height = Math.round((size * 300) / 260);
   return (
-    <svg width={size} height={height} viewBox="0 0 260 300" aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M0 0 H180 L260 80 V300 H0 Z M55 70 H150 L195 115 V185 L150 230 H55 Z"
+        d="M22 19 H62 L78 35 V65 L62 81 H22 Z M35 34 H53 L64 45 V55 L53 66 H35 Z"
         fill="#6E2EF6"
       />
-      <path d="M180 0 H260 V80 Z" fill="#FFA50A" />
+      <path d="M66 19 H78 V31 Z" fill="#FFA50A" />
     </svg>
   );
 }
@@ -90,6 +89,7 @@ function CodeColumn({
 
 export default function SiteContent() {
   const [lang, setLang] = useState<Lang>("es");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(LANG_STORAGE_KEY) as Lang | null;
@@ -110,11 +110,35 @@ export default function SiteContent() {
   const t = content[lang];
   const toggleLang = () => setLang((current) => (current === "es" ? "en" : "es"));
   const reconcileLabel = lang === "es" ? "libro conforme" : "ledger balanced";
+  const menuLabel = lang === "es" ? (menuOpen ? "Cerrar menú" : "Abrir menú") : menuOpen ? "Close menu" : "Open menu";
 
   return (
     <>
       <nav className="dth-nav">
         <div className="dth-nav-inner">
+          <button
+            type="button"
+            className="dth-nav-toggle"
+            aria-label={menuLabel}
+            aria-expanded={menuOpen}
+            aria-controls="dth-mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              {menuOpen ? (
+                <>
+                  <path d="M6 6l12 12" />
+                  <path d="M18 6L6 18" />
+                </>
+              ) : (
+                <>
+                  <path d="M3 6h18" />
+                  <path d="M3 12h18" />
+                  <path d="M3 18h18" />
+                </>
+              )}
+            </svg>
+          </button>
           <a href="#top" className="dth-brand" aria-label={siteConfig.brandName}>
             <Logo size={22} />
             {siteConfig.brandName}
@@ -133,6 +157,20 @@ export default function SiteContent() {
             </a>
           </div>
         </div>
+        {menuOpen ? (
+          <div className="dth-nav-mobile" id="dth-mobile-menu">
+            <div className="dth-nav-mobile-inner">
+              {t.nav.links.map((link) => (
+                <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
+                  {link.label}
+                </a>
+              ))}
+              <a href="#cta" className="dth-nav-cta" onClick={() => setMenuOpen(false)}>
+                {t.nav.cta}
+              </a>
+            </div>
+          </div>
+        ) : null}
       </nav>
 
       <main>
