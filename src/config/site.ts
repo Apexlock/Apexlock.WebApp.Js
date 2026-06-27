@@ -1,7 +1,7 @@
 export const siteConfig = {
-  brandName: "Apexlock",
-  domain: "apexlock.com.ar",
-  contactEmail: "contacto@apexlock.com.ar",
+  brandName: "Datharian",
+  domain: "datharian.com",
+  contactEmail: "contacto@datharian.com",
   description:
-    "Consultora boutique de ingenieria de software, datos e integraciones core para sectores regulados y operaciones complejas."
+    "Ingenieria de software para sectores regulados: sistemas que resisten la escala, decisiones que no fallan."
 };
