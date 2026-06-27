@@ -117,6 +117,29 @@ export default function SiteContent() {
     <>
       <nav className="dth-nav">
         <div className="dth-nav-inner">
+          <button
+            type="button"
+            className="dth-nav-toggle"
+            aria-label={menuLabel}
+            aria-expanded={menuOpen}
+            aria-controls="dth-mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              {menuOpen ? (
+                <>
+                  <path d="M6 6l12 12" />
+                  <path d="M18 6L6 18" />
+                </>
+              ) : (
+                <>
+                  <path d="M3 6h18" />
+                  <path d="M3 12h18" />
+                  <path d="M3 18h18" />
+                </>
+              )}
+            </svg>
+          </button>
           <a href="#top" className="dth-brand" aria-label={siteConfig.brandName}>
             <Logo size={22} />
             {siteConfig.brandName}
@@ -133,29 +156,6 @@ export default function SiteContent() {
             <a href="#cta" className="dth-nav-cta">
               {t.nav.cta}
             </a>
-            <button
-              type="button"
-              className="dth-nav-toggle"
-              aria-label={menuLabel}
-              aria-expanded={menuOpen}
-              aria-controls="dth-mobile-menu"
-              onClick={() => setMenuOpen((open) => !open)}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                {menuOpen ? (
-                  <>
-                    <path d="M6 6l12 12" />
-                    <path d="M18 6L6 18" />
-                  </>
-                ) : (
-                  <>
-                    <path d="M3 6h18" />
-                    <path d="M3 12h18" />
-                    <path d="M3 18h18" />
-                  </>
-                )}
-              </svg>
-            </button>
           </div>
         </div>
         {menuOpen ? (
