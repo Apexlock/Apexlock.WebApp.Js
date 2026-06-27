@@ -1,6 +1,7 @@
-# Apexlock static Next.js site
+# Datharian static Next.js site
 
-Static Next.js version of the current .NET landing page, prepared for Vercel.
+Static Next.js landing page for Datharian, prepared for Vercel. Includes a client-side ES/EN
+language toggle (no server-side i18n routing, since the site is fully static-exported).
 
 ## Change the brand name
 
@@ -8,10 +9,15 @@ Edit `src/config/site.ts`:
 
 ```ts
 export const siteConfig = {
-  brandName: "Apexlock",
+  brandName: "Datharian",
   ...
 };
 ```
+
+## Change copy / translations
+
+Edit `src/config/content.ts` — all UI copy lives in a single `content = { es: {...}, en: {...} }`
+dictionary consumed by `src/components/SiteContent.tsx`.
 
 ## Run locally
 
