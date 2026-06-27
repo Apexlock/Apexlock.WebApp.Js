@@ -90,6 +90,7 @@ function CodeColumn({
 
 export default function SiteContent() {
   const [lang, setLang] = useState<Lang>("es");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(LANG_STORAGE_KEY) as Lang | null;
@@ -110,6 +111,7 @@ export default function SiteContent() {
   const t = content[lang];
   const toggleLang = () => setLang((current) => (current === "es" ? "en" : "es"));
   const reconcileLabel = lang === "es" ? "libro conforme" : "ledger balanced";
+  const menuLabel = lang === "es" ? (menuOpen ? "Cerrar menú" : "Abrir menú") : menuOpen ? "Close menu" : "Open menu";
 
   return (
     <>
@@ -131,8 +133,45 @@ export default function SiteContent() {
             <a href="#cta" className="dth-nav-cta">
               {t.nav.cta}
             </a>
+            <button
+              type="button"
+              className="dth-nav-toggle"
+              aria-label={menuLabel}
+              aria-expanded={menuOpen}
+              aria-controls="dth-mobile-menu"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                {menuOpen ? (
+                  <>
+                    <path d="M6 6l12 12" />
+                    <path d="M18 6L6 18" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M3 6h18" />
+                    <path d="M3 12h18" />
+                    <path d="M3 18h18" />
+                  </>
+                )}
+              </svg>
+            </button>
           </div>
         </div>
+        {menuOpen ? (
+          <div className="dth-nav-mobile" id="dth-mobile-menu">
+            <div className="dth-nav-mobile-inner">
+              {t.nav.links.map((link) => (
+                <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
+                  {link.label}
+                </a>
+              ))}
+              <a href="#cta" className="dth-nav-cta" onClick={() => setMenuOpen(false)}>
+                {t.nav.cta}
+              </a>
+            </div>
+          </div>
+        ) : null}
       </nav>
 
       <main>

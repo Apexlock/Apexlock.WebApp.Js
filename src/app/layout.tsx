@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
@@ -20,6 +20,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
   variable: "--font-mono"
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0a1226"
+};
 
 export const metadata: Metadata = {
   title: `${siteConfig.brandName} - Sistemas que resisten la escala`,

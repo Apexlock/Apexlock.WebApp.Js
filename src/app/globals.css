@@ -18,6 +18,8 @@
   --color-light-card-hover: #ece6fe;
   --color-light-line: #e7e6e1;
   --radius: 4px;
+  --nav-h: 58px;
+  --gutter: 1.25rem;
 }
 
 *,
@@ -32,6 +34,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -47,8 +50,14 @@ a {
   text-decoration: none;
 }
 
+img,
 svg {
   display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
 }
 
 ::selection {
@@ -56,46 +65,49 @@ svg {
   color: #fff;
 }
 
+/* Shared centered container (mobile-first gutters) */
 .section-inner,
 .dth-nav-inner,
 .metrics-inner,
 .sectors-inner,
 .dth-footer-inner {
-  width: min(100% - 2.5rem, 76rem);
+  width: min(100% - (var(--gutter) * 2), 76rem);
   margin-inline: auto;
 }
 
-/* NAV */
+/* ============================================================
+   NAV (mobile-first)
+   ============================================================ */
 .dth-nav {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(10, 18, 38, 0.86);
+  background: rgba(10, 18, 38, 0.9);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-line);
 }
 
 .dth-nav-inner {
-  height: 62px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  min-height: var(--nav-h);
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .dth-brand {
-  justify-self: start;
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 10px;
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 21px;
+  font-size: 19px;
   letter-spacing: -0.02em;
 }
 
+/* Desktop center links — hidden on mobile, shown via the mobile panel */
 .dth-nav-links {
-  justify-self: center;
-  display: flex;
+  display: none;
   gap: 2px;
 }
 
@@ -112,20 +124,20 @@ svg {
 }
 
 .dth-nav-actions {
-  justify-self: end;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .dth-nav-cta {
   background: var(--color-accent);
   color: #fff;
   font-weight: 500;
-  font-size: 13.5px;
+  font-size: 13px;
   line-height: 1;
-  padding: 10px 18px;
+  padding: 10px 14px;
   border-radius: var(--radius);
+  white-space: nowrap;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -144,7 +156,7 @@ svg {
   font-family: var(--font-mono);
   font-size: 11.5px;
   letter-spacing: 0.06em;
-  padding: 6px 9px;
+  padding: 7px 9px;
   border-radius: var(--radius);
   cursor: pointer;
   transition: border-color 0.2s ease, color 0.2s ease;
@@ -163,10 +175,75 @@ svg {
   stroke-width: 1.4;
 }
 
-/* HERO */
+/* Hamburger — visible on mobile only */
+.dth-nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius);
+  color: var(--color-accent-soft);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.dth-nav-toggle:hover {
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.dth-nav-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+
+/* Mobile dropdown panel */
+.dth-nav-mobile {
+  border-top: 1px solid var(--color-line);
+  background: rgba(10, 18, 38, 0.98);
+  backdrop-filter: blur(14px);
+}
+
+.dth-nav-mobile-inner {
+  width: min(100% - (var(--gutter) * 2), 76rem);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 18px;
+}
+
+.dth-nav-mobile a {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--color-line);
+  transition: color 0.2s ease;
+}
+
+.dth-nav-mobile a:hover {
+  color: var(--color-text);
+}
+
+.dth-nav-mobile .dth-nav-cta {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 15px;
+  padding: 14px 18px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
 .dth-hero {
   position: relative;
-  min-height: calc(100vh - 62px);
+  min-height: calc(100svh - var(--nav-h));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,11 +251,12 @@ svg {
   border-bottom: 1px solid var(--color-line);
 }
 
+/* Animated code background — hidden on small screens for clarity/perf */
 .hero-code {
+  display: none;
   position: absolute;
   inset: 0;
-  display: flex;
-  gap: 48px;
+  gap: 24px;
   justify-content: center;
   padding: 0 24px;
   font-family: var(--font-mono);
@@ -224,9 +302,9 @@ svg {
   position: relative;
   z-index: 2;
   text-align: center;
-  width: min(100% - 2.5rem, 54rem);
+  width: min(100% - (var(--gutter) * 2), 54rem);
   margin-inline: auto;
-  padding: 64px 0;
+  padding: 56px 0 72px;
 }
 
 .hero-eyebrow {
@@ -234,14 +312,15 @@ svg {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent-eyebrow);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .hero-dot {
+  flex: none;
   width: 7px;
   height: 7px;
   background: var(--color-orange);
@@ -250,10 +329,10 @@ svg {
 .hero-title {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(2.6rem, 5.8vw, 4.6rem);
-  line-height: 1.02;
+  font-size: clamp(2.1rem, 8vw, 4.6rem);
+  line-height: 1.05;
   letter-spacing: -0.03em;
-  margin-bottom: 26px;
+  margin-bottom: 22px;
   text-wrap: balance;
 }
 
@@ -264,10 +343,10 @@ svg {
 
 .hero-lede {
   color: var(--color-text-muted);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.7;
   max-width: 39rem;
-  margin: 0 auto 38px;
+  margin: 0 auto 32px;
 }
 
 .hero-actions {
@@ -280,6 +359,7 @@ svg {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-weight: 500;
   font-size: 14px;
@@ -311,6 +391,7 @@ svg {
 }
 
 .hero-scroll {
+  display: none;
   position: absolute;
   bottom: 22px;
   left: 50%;
@@ -321,7 +402,6 @@ svg {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(157, 154, 184, 0.55);
-  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
@@ -334,7 +414,9 @@ svg {
   background: linear-gradient(rgba(110, 46, 246, 0.6), transparent);
 }
 
-/* METRICS */
+/* ============================================================
+   METRICS (gap-line technique — column-count agnostic)
+   ============================================================ */
 .metrics {
   border-bottom: 1px solid var(--color-line);
   background: var(--color-surface);
@@ -342,16 +424,14 @@ svg {
 
 .metrics-inner {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--color-line);
 }
 
 .metric {
-  padding: 30px 28px;
-  border-right: 1px solid var(--color-line);
-}
-
-.metric:last-child {
-  border-right: 0;
+  background: var(--color-surface);
+  padding: 24px 18px;
 }
 
 .metric-value {
@@ -360,7 +440,7 @@ svg {
   gap: 8px;
   margin-bottom: 8px;
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.03em;
 }
@@ -383,17 +463,19 @@ svg {
   color: var(--color-text-faint);
 }
 
-/* SECTORS */
+/* ============================================================
+   SECTORS
+   ============================================================ */
 .sectors {
   border-bottom: 1px solid var(--color-line);
   background: var(--color-bg);
-  padding: 20px 0;
+  padding: 18px 0;
 }
 
 .sectors-inner {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 16px 28px;
   flex-wrap: wrap;
 }
 
@@ -408,7 +490,7 @@ svg {
 
 .sectors-list {
   display: flex;
-  gap: 32px;
+  gap: 16px 24px;
   flex-wrap: wrap;
   font-family: var(--font-mono);
 }
@@ -420,18 +502,20 @@ svg {
   color: var(--color-text-muted);
 }
 
-/* SECTION SHARED */
+/* ============================================================
+   SECTION SHARED
+   ============================================================ */
 .section {
   border-bottom: 1px solid var(--color-line);
   background: var(--color-bg);
 }
 
 .section-inner {
-  padding: 88px 0;
+  padding: 56px 0;
 }
 
 .section-head {
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
 .section-eyebrow {
@@ -447,6 +531,7 @@ svg {
 }
 
 .eyebrow-dot {
+  flex: none;
   width: 6px;
   height: 6px;
   background: var(--color-accent);
@@ -455,8 +540,8 @@ svg {
 .section-title {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
-  line-height: 1.08;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  line-height: 1.1;
   letter-spacing: -0.025em;
   margin-bottom: 14px;
 }
@@ -468,7 +553,9 @@ svg {
   max-width: 31rem;
 }
 
-/* CAPABILITIES (light section) */
+/* ============================================================
+   CAPABILITIES (light section)
+   ============================================================ */
 .cap-section {
   background: var(--color-light-bg);
   color: var(--color-light-text);
@@ -488,7 +575,7 @@ svg {
 
 .cap-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 1px;
   background: var(--color-light-line);
   border: 1px solid var(--color-light-line);
@@ -499,7 +586,7 @@ svg {
 .cap-card {
   position: relative;
   background: var(--color-light-card);
-  padding: 40px 34px;
+  padding: 28px 22px;
   overflow: hidden;
   transition: background 0.2s ease;
 }
@@ -523,13 +610,13 @@ svg {
   font-size: 10px;
   letter-spacing: 0.16em;
   color: var(--color-accent);
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .cap-card h3 {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   letter-spacing: -0.02em;
   margin-bottom: 11px;
 }
@@ -540,7 +627,9 @@ svg {
   line-height: 1.65;
 }
 
-/* PROCESS */
+/* ============================================================
+   PROCESS
+   ============================================================ */
 .proc-section {
   background: var(--color-surface);
 }
@@ -550,6 +639,7 @@ svg {
 }
 
 .proc-line {
+  display: none;
   position: absolute;
   top: 23px;
   left: 23px;
@@ -561,12 +651,14 @@ svg {
 .proc-grid {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
 .proc-step {
-  padding-right: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 12px;
 }
 
 .proc-bullet {
@@ -581,7 +673,7 @@ svg {
   justify-content: center;
   font-family: var(--font-mono);
   font-size: 12px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .proc-bullet-active {
@@ -628,11 +720,9 @@ svg {
   border-radius: var(--radius);
 }
 
-/* QUOTE */
-.quote-section .section-inner {
-  padding: 96px 0;
-}
-
+/* ============================================================
+   QUOTE
+   ============================================================ */
 .quote-block {
   max-width: 48rem;
   margin: 0 auto;
@@ -644,16 +734,16 @@ svg {
   width: 12px;
   height: 12px;
   background: var(--color-orange);
-  margin-bottom: 30px;
+  margin-bottom: 26px;
 }
 
 .quote-block p {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  line-height: 1.32;
+  font-size: clamp(1.35rem, 4.5vw, 2.2rem);
+  line-height: 1.34;
   letter-spacing: -0.02em;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   text-wrap: balance;
 }
 
@@ -665,12 +755,17 @@ svg {
   color: var(--color-accent-eyebrow);
 }
 
-/* CTA */
+/* ============================================================
+   CTA
+   ============================================================ */
 .cta-section {
   position: relative;
   background: var(--color-accent);
-  padding: 92px 0;
   overflow: hidden;
+}
+
+.cta-section .section-inner {
+  padding: 64px 0;
 }
 
 .cta-notch {
@@ -679,8 +774,8 @@ svg {
   right: 0;
   width: 0;
   height: 0;
-  border-top: 84px solid var(--color-orange);
-  border-left: 84px solid transparent;
+  border-top: 64px solid var(--color-orange);
+  border-left: 64px solid transparent;
 }
 
 .cta-block {
@@ -693,8 +788,8 @@ svg {
 .cta-block h2 {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(2rem, 3.8vw, 2.8rem);
-  line-height: 1.06;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.08;
   letter-spacing: -0.025em;
   color: #fff;
   margin-bottom: 16px;
@@ -704,7 +799,7 @@ svg {
   color: rgba(255, 255, 255, 0.76);
   font-size: 16px;
   line-height: 1.65;
-  margin-bottom: 34px;
+  margin-bottom: 30px;
 }
 
 .cta-btn {
@@ -721,35 +816,37 @@ svg {
 }
 
 .cta-micro {
-  margin-top: 20px;
+  margin-top: 18px;
   color: rgba(255, 255, 255, 0.6);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.06em;
 }
 
-/* FOOTER */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 .dth-footer {
   background: var(--color-bg);
-  padding: 30px 0;
+  padding: 28px 0;
 }
 
 .dth-footer-inner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
 }
 
 .dth-footer-links {
   display: flex;
-  gap: 26px;
+  flex-wrap: wrap;
+  gap: 18px 24px;
 }
 
 .dth-footer-links a {
   color: var(--color-text-muted-2);
-  font-size: 13px;
+  font-size: 14px;
   transition: color 0.2s ease;
 }
 
@@ -759,16 +856,19 @@ svg {
 
 .dth-footer-email {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: rgba(157, 154, 184, 0.7);
   transition: color 0.2s ease;
+  word-break: break-all;
 }
 
 .dth-footer-email:hover {
   color: var(--color-orange);
 }
 
-/* KEYFRAMES */
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
 @keyframes dth-up {
   from {
     transform: translateY(0);
@@ -797,71 +897,156 @@ svg {
   }
 }
 
-/* RESPONSIVE */
-@media (max-width: 960px) {
-  .dth-nav-links {
-    display: none;
+/* ============================================================
+   RESPONSIVE — mobile-first, scaling UP with min-width
+   ============================================================ */
+
+/* Small tablets / large phones */
+@media (min-width: 600px) {
+  :root {
+    --gutter: 1.75rem;
   }
 
-  .metrics-inner,
-  .proc-grid,
-  .cap-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .metric {
-    border-right: 0;
-    border-bottom: 1px solid var(--color-line);
-  }
-
-  .metric:last-child {
-    border-bottom: 0;
-  }
-
-  .proc-line {
-    display: none;
-  }
-
-  .proc-step {
-    padding: 1.5rem;
-    border: 1px solid var(--color-line-strong);
-    border-radius: 12px;
-  }
-
-  .hero-code {
-    gap: 24px;
-  }
-}
-
-@media (max-width: 560px) {
   .dth-brand {
-    font-size: 18px;
+    font-size: 21px;
   }
 
-  .lang-toggle span {
-    display: none;
+  .cap-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .dth-nav-cta {
-    padding: 8px 14px;
-    font-size: 12.5px;
+  .proc-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .hero-title {
-    font-size: clamp(2.1rem, 9vw, 2.8rem);
-  }
-
-  .hero-code {
-    display: none;
+  .cap-card {
+    padding: 36px 30px;
   }
 
   .section-inner {
-    padding: 56px 0;
+    padding: 72px 0;
   }
 
-  .cap-card,
-  .quote-block {
-    padding: 1.25rem;
+  .cta-section .section-inner {
+    padding: 80px 0;
+  }
+
+  .cta-notch {
+    border-top-width: 84px;
+    border-left-width: 84px;
+  }
+
+  .metric {
+    padding: 28px 24px;
+  }
+
+  .metric-value {
+    font-size: 32px;
+  }
+
+  .dth-footer-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}
+
+/* Desktop — restore full multi-column layout + inline nav */
+@media (min-width: 960px) {
+  :root {
+    --gutter: 1.25rem;
+    --nav-h: 62px;
+  }
+
+  .dth-nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+  }
+
+  .dth-brand {
+    justify-self: start;
+  }
+
+  .dth-nav-links {
+    display: flex;
+    justify-self: center;
+  }
+
+  .dth-nav-actions {
+    justify-self: end;
+    gap: 10px;
+  }
+
+  .dth-nav-cta {
+    font-size: 13.5px;
+    padding: 10px 18px;
+  }
+
+  .dth-nav-toggle,
+  .dth-nav-mobile {
+    display: none;
+  }
+
+  .hero-code {
+    display: flex;
+    gap: 48px;
+  }
+
+  .hero-content {
+    padding: 64px 0;
+  }
+
+  .hero-scroll {
+    display: flex;
+  }
+
+  .metrics-inner {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .section-inner {
+    padding: 88px 0;
+  }
+
+  .section-head {
+    margin-bottom: 48px;
+  }
+
+  .proc-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .proc-line {
+    display: block;
+  }
+
+  .proc-step {
+    padding: 0 8px 0 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .cap-card {
+    padding: 40px 34px;
+  }
+
+  .cta-section .section-inner {
+    padding: 92px 0;
+  }
+}
+
+/* Wide desktop — larger sectors spacing */
+@media (min-width: 1200px) {
+  .sectors-inner {
+    gap: 40px;
+  }
+
+  .sectors-list {
+    gap: 32px;
   }
 }
 
